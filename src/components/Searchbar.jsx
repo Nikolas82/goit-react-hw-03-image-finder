@@ -13,11 +13,12 @@ export class Searchbar extends Component {
   handleSearchImages = e => {
     this.setState({ searchImages: e.currentTarget.value });
   };
+
   handleSubmit = e => {
     e.preventDefault();
 
     if (this.state.searchImages.trim() === '') {
-      toast.error('Wow so easy!');
+      toast.error('Please try again!');
       return;
     }
     this.props.onSubmit(this.state.searchImages);

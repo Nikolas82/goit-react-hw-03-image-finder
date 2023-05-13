@@ -2,26 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './ImageGallery.module.css';
 
-export const ImageGalleryItem = ({ src, alt, largeImageURL, onClick }) => {
-  const handleClick = () => {
-    onClick(largeImageURL);
-  };
-
+export const ImageGalleryItem = ({ image, onClick }) => {
   return (
-    <li className={css.ImageGalleryItem}>
+    <li key={image.id}>
       <img
-        src={src}
-        alt={alt}
         className={css.ImageGalleryItemImage}
-        onClick={handleClick}
+        src={image.webformatURL}
+        alt={image.tags}
+        onClick={() => onClick(image.largeImageURL)}
       />
     </li>
   );
 };
 
 ImageGalleryItem.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
+  image: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+  }),
+
   onClick: PropTypes.func.isRequired,
 };
